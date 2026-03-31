@@ -1004,7 +1004,7 @@ footer a:hover { color: var(--nude); }
           Quero a calculadora
           <span>→</span>
         </a>
-        <a href="#preview" class="btn-cta-ghost">Ver como funciona</a>
+        <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" class="btn-cta-ghost">Ver como funciona</a>
       </div>
     </div>
 
@@ -1476,10 +1476,10 @@ document.querySelectorAll('a[href="https://pay.kiwify.com.br/8h9Go1o" target="_b
   });
 });
 
-document.querySelectorAll('a[href="#preview"]').forEach(function(btn) {
+document.querySelectorAll('a[href="https://pay.kiwify.com.br/8h9Go1o" target="_blank"]').forEach(function(btn) {
   btn.addEventListener('click', function(e) {
     e.preventDefault();
-    document.getElementById('preview').scrollIntoView({ behavior: 'smooth' });
+    window.open('https://pay.kiwify.com.br/8h9Go1o', '_blank');
   });
 });
 </script>
