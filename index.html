@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Short Stay — Viabilidade de Airbnb</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde-escuro: #2D3B2A;
+  --verde: #3A6B4A;
+  --verde-medio: #4A7A5A;
+  --nude: #C4B09A;
+  --nude-claro: #D4C4B0;
+  --creme: #F4EFE6;
+  --marrom: #5C3317;
+  --marrom-claro: #A0724A;
+  --dourado: #8B7526;
+  --off-white: #FAF8F4;
+  --texto: #1E1710;
+  --sage: #7A7D6E;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--texto);
+  overflow-x: hidden;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--verde-escuro);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 48px 80px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,176,154,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58,107,74,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--nude);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.1s forwards;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--nude);
+  opacity: 0.5;
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5.5vw, 68px);
+  font-weight: 300;
+  color: var(--creme);
+  line-height: 1.1;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.25s forwards;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--nude);
+}
+
+.hero-sub {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(244,239,230,0.65);
+  max-width: 520px;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.55s forwards;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--nude);
+  color: var(--verde-escuro);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-cta:hover {
+  background: var(--nude-claro);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.btn-cta-ghost {
+  font-size: 12px;
+  color: rgba(244,239,230,0.5);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(244,239,230,0.2);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.btn-cta-ghost:hover {
+  color: var(--nude);
+  border-color: var(--nude);
+}
+
+/* HERO CARD FLUTUANTE */
+.hero-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(196,176,154,0.15);
+  border-radius: 4px;
+  padding: 36px 32px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  animation: fadeLeft 0.9s 0.5s forwards;
+}
+
+.hero-card-tag {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--nude);
+  opacity: 0.7;
+  margin-bottom: 20px;
+}
+
+.hero-card-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.hero-card-item:last-child { border-bottom: none; }
+
+.hci-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(196,176,154,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.hci-text { flex: 1; }
+
+.hci-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--creme);
+  margin-bottom: 3px;
+}
+
+.hci-desc {
+  font-size: 11px;
+  color: rgba(244,239,230,0.45);
+  line-height: 1.5;
+}
+
+.hero-price-tag {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(196,176,154,0.15);
+  text-align: center;
+}
+
+.hero-price-from {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(244,239,230,0.4);
+  margin-bottom: 6px;
+}
+
+.hero-price-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+  color: var(--creme);
+  line-height: 1;
+}
+
+.hero-price-sub {
+  font-size: 11px;
+  color: rgba(244,239,230,0.4);
+  margin-top: 6px;
+}
+
+/* ─── SEÇÕES ─── */
+section { position: relative; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+/* ─── PROBLEMA ─── */
+.problema {
+  background: var(--creme);
+  padding: 100px 0;
+}
+
+.problema-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.section-eyebrow {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  color: var(--marrom);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.section-title em { font-style: italic; color: var(--marrom-claro); }
+
+.section-body {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--sage);
+}
+
+.dor-list {
+  list-style: none;
+  margin-top: 32px;
+}
+
+.dor-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(92,51,23,0.08);
+  font-size: 13px;
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+.dor-list li:last-child { border-bottom: none; }
+
+.dor-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── O QUE É ─── */
+.oque-e {
+  background: var(--verde-escuro);
+  padding: 100px 0;
+}
+
+.oque-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.oque-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(196,176,154,0.1);
+  padding: 32px 24px;
+  transition: background 0.3s;
+}
+
+.oque-card:hover { background: rgba(255,255,255,0.07); }
+
+.oque-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: rgba(196,176,154,0.2);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.oque-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--nude);
+  margin-bottom: 12px;
+}
+
+.oque-card-desc {
+  font-size: 12px;
+  color: rgba(244,239,230,0.55);
+  line-height: 1.7;
+}
+
+/* ─── FEATURES ─── */
+.features {
+  background: var(--off-white);
+  padding: 100px 0;
+}
+
+.features-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 64px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feat-card {
+  background: #fff;
+  border: 1px solid rgba(92,51,23,0.08);
+  border-radius: 3px;
+  padding: 32px 28px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.feat-card:hover {
+  box-shadow: 0 12px 40px rgba(61,64,53,0.08);
+  transform: translateY(-3px);
+}
+
+.feat-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.feat-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--verde-escuro);
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.feat-desc {
+  font-size: 12px;
+  color: var(--sage);
+  line-height: 1.75;
+}
+
+/* ─── PARA QUEM ─── */
+.para-quem {
+  background: var(--creme);
+  padding: 100px 0;
+}
+
+.pq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.pq-card {
+  background: var(--verde-escuro);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pq-card::before {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  pointer-events: none;
+}
+
+.pq-card-icon { font-size: 32px; margin-bottom: 20px; }
+
+.pq-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--creme);
+  margin-bottom: 12px;
+}
+
+.pq-card-desc {
+  font-size: 12px;
+  color: rgba(244,239,230,0.55);
+  line-height: 1.75;
+}
+
+.pq-card-ul {
+  list-style: none;
+  margin-top: 16px;
+}
+
+.pq-card-ul li {
+  font-size: 12px;
+  color: rgba(244,239,230,0.65);
+  padding: 5px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.pq-card-ul li::before {
+  content: '—';
+  color: var(--nude);
+  opacity: 0.6;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── PREVIEW ─── */
+.preview {
+  background: var(--off-white);
+  padding: 100px 0;
+}
+
+.preview-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.preview-mockup {
+  background: var(--verde-escuro);
+  border-radius: 6px;
+  padding: 24px;
+  box-shadow: 0 32px 80px rgba(45,59,42,0.25);
+  position: relative;
+}
+
+.mock-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.mock-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.mock-dot:nth-child(1) { background: rgba(255,255,255,0.12); }
+.mock-dot:nth-child(2) { background: rgba(255,255,255,0.08); }
+.mock-dot:nth-child(3) { background: rgba(255,255,255,0.06); }
+
+.mock-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 20px;
+}
+
+.mock-tab {
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(244,239,230,0.35);
+  padding: 8px 12px;
+  border-bottom: 1px solid transparent;
+}
+
+.mock-tab.active {
+  color: var(--nude);
+  border-bottom-color: var(--nude);
+}
+
+.mock-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.mock-row:last-child { border-bottom: none; }
+
+.mock-label { font-size: 10px; color: rgba(244,239,230,0.4); }
+
+.mock-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--nude);
+}
+
+.mock-val.verde { color: #7BC47A; }
+.mock-val.sage { color: rgba(244,239,230,0.3); }
+
+.mock-big {
+  text-align: center;
+  padding: 20px 0 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 12px;
+}
+
+.mock-big-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,239,230,0.3); margin-bottom: 6px; }
+
+.mock-big-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--creme);
+}
+
+.preview-content { }
+
+.checklist {
+  list-style: none;
+  margin-top: 32px;
+}
+
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(92,51,23,0.08);
+  font-size: 13px;
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+.checklist li:last-child { border-bottom: none; }
+
+.check-icon {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(58,107,74,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--verde);
+}
+
+/* ─── CTA MEIO ─── */
+.cta-meio {
+  background: var(--verde-escuro);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.cta-meio h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  color: var(--creme);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.cta-meio h2 em { font-style: italic; color: var(--nude); }
+
+.cta-meio p {
+  font-size: 14px;
+  color: rgba(244,239,230,0.55);
+  margin-bottom: 36px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+
+/* ─── INCLUI ─── */
+.inclui {
+  background: var(--off-white);
+  padding: 100px 0;
+}
+
+.inclui-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.inclui-list {
+  list-style: none;
+  margin-top: 16px;
+}
+
+.inclui-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(92,51,23,0.08);
+}
+
+.inclui-list li:last-child { border-bottom: none; }
+
+.inclui-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: var(--creme);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inclui-text-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--texto);
+  margin-bottom: 4px;
+}
+
+.inclui-text-desc {
+  font-size: 12px;
+  color: var(--sage);
+  line-height: 1.6;
+}
+
+/* ─── PREÇO ─── */
+.preco-section {
+  background: var(--creme);
+  padding: 100px 0;
+  text-align: center;
+}
+
+.preco-inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.preco-card {
+  background: var(--verde-escuro);
+  border-radius: 4px;
+  padding: 52px 48px;
+  margin-top: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.preco-card::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,176,154,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.preco-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(244,239,230,0.4);
+  margin-bottom: 8px;
+}
+
+.preco-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--creme);
+  margin-bottom: 32px;
+}
+
+.preco-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 28px 0;
+}
+
+.preco-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: rgba(244,239,230,0.65);
+}
+
+.preco-linha::before {
+  content: '✓';
+  color: var(--nude);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.preco-valor-wrap {
+  text-align: center;
+  margin: 32px 0 28px;
+}
+
+.preco-de {
+  font-size: 12px;
+  color: rgba(244,239,230,0.3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.preco-principal {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--creme);
+  line-height: 1;
+}
+
+.preco-principal sup {
+  font-size: 28px;
+  vertical-align: super;
+  font-weight: 400;
+}
+
+.preco-obs {
+  font-size: 11px;
+  color: rgba(244,239,230,0.35);
+  margin-top: 8px;
+}
+
+.preco-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--nude);
+  color: var(--verde-escuro);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px 32px;
+  border-radius: 2px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.preco-cta:hover {
+  background: var(--nude-claro);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.preco-garantia {
+  margin-top: 20px;
+  font-size: 11px;
+  color: rgba(244,239,230,0.3);
+  line-height: 1.6;
+}
+
+/* ─── FAQ ─── */
+.faq {
+  background: var(--off-white);
+  padding: 100px 0;
+}
+
+.faq-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(92,51,23,0.1);
+}
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--texto);
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.faq-q:hover { color: var(--verde); }
+
+.faq-arrow {
+  font-size: 18px;
+  color: var(--sage);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+.faq-a {
+  display: none;
+  padding: 0 0 22px;
+  font-size: 13px;
+  color: var(--sage);
+  line-height: 1.85;
+}
+
+.faq-item.open .faq-a { display: block; }
+
+/* ─── FINAL CTA ─── */
+.final-cta {
+  background: var(--verde-escuro);
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(196,176,154,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.final-cta h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 58px);
+  font-weight: 300;
+  color: var(--creme);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.final-cta h2 em { font-style: italic; color: var(--nude); }
+
+.final-cta p {
+  font-size: 14px;
+  color: rgba(244,239,230,0.5);
+  max-width: 460px;
+  margin: 0 auto 44px;
+  line-height: 1.8;
+  position: relative;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--texto);
+  padding: 36px 48px;
+  text-align: center;
+}
+
+footer p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+}
+
+footer a {
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover { color: var(--nude); }
+
+/* ─── ANIMAÇÕES ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVO ─── */
+@media (max-width: 900px) {
+  .hero { padding: 80px 24px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-card { display: none; }
+  .wrap { padding: 0 24px; }
+  .problema-inner,
+  .preview-inner,
+  .inclui-inner { grid-template-columns: 1fr; gap: 40px; }
+  .oque-grid,
+  .features-grid,
+  .pq-grid { grid-template-columns: 1fr; gap: 2px; }
+  .preco-card { padding: 36px 28px; }
+  .preco-principal { font-size: 56px; }
+  footer { padding: 28px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Ferramenta para investidores</div>
+      <h1>Antes de comprar,<br><em>calcule se fecha.</em></h1>
+      <p class="hero-sub">
+        A calculadora que responde a pergunta que todo investidor deveria fazer antes de entrar numa operação short stay: <strong style="color:rgba(244,239,230,0.85);">o retorno real supera o CDI?</strong>
+      </p>
+      <div class="hero-ctas">
+        <a href="#preco" class="btn-cta">
+          Quero a calculadora
+          <span>→</span>
+        </a>
+        <a href="#preview" class="btn-cta-ghost">Ver como funciona</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-tag">O que você calcula</div>
+      <div class="hero-card-item">
+        <div class="hci-icon">①</div>
+        <div class="hci-text">
+          <div class="hci-label">Custo real de aquisição</div>
+          <div class="hci-desc">Preço + ITBI + cartório + reforma + mobília + custos ocultos</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">②</div>
+        <div class="hci-text">
+          <div class="hci-label">Receita líquida mensal</div>
+          <div class="hci-desc">3 cenários de ocupação × diária × taxa Airbnb × impostos</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">③</div>
+        <div class="hci-text">
+          <div class="hci-label">Payback e CDI</div>
+          <div class="hci-desc">Em quanto tempo se paga e se bate a renda fixa</div>
+        </div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hci-icon">④</div>
+        <div class="hci-text">
+          <div class="hci-label">Retorno total na saída</div>
+          <div class="hci-desc">Renda acumulada + venda − todos os custos → resultado real</div>
+        </div>
+      </div>
+      <div class="hero-price-tag">
+        <div class="hero-price-from">Acesso único por</div>
+        <div class="hero-price-val">R$ 197</div>
+        <div class="hero-price-sub">arquivo para download · uso vitalício</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROBLEMA ══════════ -->
+<section class="problema">
+  <div class="wrap">
+    <div class="problema-inner">
+      <div class="reveal">
+        <div class="section-eyebrow">O problema</div>
+        <h2 class="section-title">A maioria compra<br><em>no feeling.</em></h2>
+        <p class="section-body">
+          Investir em imóvel para Airbnb parece simples: compra, reforma, aluga e recebe. Mas o que parece óbvio no papel frequentemente falha na prática — porque os cálculos feitos "de cabeça" deixam de fora exatamente os custos que destroem a rentabilidade.
+        </p>
+      </div>
+      <div class="reveal">
+        <ul class="dor-list">
+          <li><span class="dor-icon">⚠️</span>Comprar sem saber se o retorno supera o CDI — e só descobrir depois de imobilizar o capital</li>
+          <li><span class="dor-icon">⚠️</span>Esquecer ITBI, cartório, comissão e meses sem receita durante a reforma no custo real da operação</li>
+          <li><span class="dor-icon">⚠️</span>Projetar a renda no cenário otimista e tomar a decisão como se ele fosse o único possível</li>
+          <li><span class="dor-icon">⚠️</span>Não saber quanto imposto vai pagar — e ver a rentabilidade desaparecer na hora da declaração</li>
+          <li><span class="dor-icon">⚠️</span>Planejar a venda sem contar corretor, imposto sobre o ganho e custos de saída</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ O QUE É ══════════ -->
+<section class="oque-e">
+  <div class="wrap">
+    <div class="reveal" style="max-width:600px;">
+      <div class="section-eyebrow" style="color:var(--nude);opacity:0.7;">A solução</div>
+      <h2 class="section-title" style="color:var(--creme);">Uma ferramenta feita<br><em style="color:var(--nude);">por quem opera.</em></h2>
+      <p class="section-body" style="color:rgba(244,239,230,0.55);">
+        A Calculadora Short Stay foi desenvolvida por uma operadora ativa do modelo, com base nos erros, acertos e aprendizados de quem já passou pelo processo de ponta a ponta — da análise do imóvel até a venda.
+      </p>
+    </div>
+    <div class="oque-grid reveal" style="transition-delay:0.15s;">
+      <div class="oque-card">
+        <div class="oque-num">01</div>
+        <div class="oque-card-title">Aquisição & Preparo</div>
+        <div class="oque-card-desc">Preço, desconto, forma de compra, ITBI, cartório, reforma com contingência, mobília e prazo até o 1º hóspede.</div>
+      </div>
+      <div class="oque-card">
+        <div class="oque-num">02</div>
+        <div class="oque-card-title">Receita & Custos</div>
+        <div class="oque-card-desc">Diária, 3 cenários de ocupação, custos mensais fixos e variáveis, regime tributário e imposto estimado.</div>
+      </div>
+      <div class="oque-card">
+        <div class="oque-num">03</div>
+        <div class="oque-card-title">Resultado & Payback</div>
+        <div class="oque-card-desc">Lucro líquido mensal, tempo de retorno do investimento e comparação direta com o CDI.</div>
+      </div>
+      <div class="oque-card">
+        <div class="oque-num">04</div>
+        <div class="oque-card-title">Cenário de Venda</div>
+        <div class="oque-card-desc">Quando e por quanto vender, custos de saída completos e retorno total consolidado da operação.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FEATURES ══════════ -->
+<section class="features">
+  <div class="wrap">
+    <div class="features-header reveal">
+      <div class="section-eyebrow">Funcionalidades</div>
+      <h2 class="section-title">Tudo que a análise<br><em>precisa ter</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal" style="transition-delay:0s;">
+        <div class="feat-icon">🏛️</div>
+        <div class="feat-title">Módulo de Leilão Judicial</div>
+        <div class="feat-desc">Calcule o lance máximo que ainda gera retorno, com comissão do leiloeiro, honorários, dívidas do imóvel e período sem receita.</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.1s;">
+        <div class="feat-icon">🏦</div>
+        <div class="feat-title">Financiamento Bancário</div>
+        <div class="feat-desc">Simule entrada, parcela mensal e impacto no fluxo de caixa. Entenda se financiar melhora ou piora o retorno sobre o capital próprio.</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.2s;">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title">3 Cenários Simultâneos</div>
+        <div class="feat-desc">Conservador, base e otimista calculados ao mesmo tempo. Tome a decisão com base no intervalo real, não em um único número.</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0s;">
+        <div class="feat-icon">⚖️</div>
+        <div class="feat-title">Comparação com CDI</div>
+        <div class="feat-desc">O benchmark automático que responde: "vale o risco e o trabalho do Airbnb versus deixar o dinheiro rendendo?"</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.1s;">
+        <div class="feat-icon">🧾</div>
+        <div class="feat-title">Impostos por Regime</div>
+        <div class="feat-desc">PJ Imobiliário, PJ Simples, PF Carnê-Leão. Ganho de capital na venda calculado com base no custo total documentado.</div>
+      </div>
+      <div class="feat-card reveal" style="transition-delay:0.2s;">
+        <div class="feat-icon">📈</div>
+        <div class="feat-title">Retorno Total Consolidado</div>
+        <div class="feat-desc">Renda acumulada + valorização + resultado da venda — tudo em um único número para decidir se a operação fechou bem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PARA QUEM ══════════ -->
+<section class="para-quem">
+  <div class="wrap">
+    <div class="reveal" style="max-width:560px;margin-bottom:0;">
+      <div class="section-eyebrow">Para quem é</div>
+      <h2 class="section-title">Feita para quem<br><em>decide com número</em></h2>
+    </div>
+    <div class="pq-grid">
+      <div class="pq-card reveal" style="transition-delay:0s;">
+        <div class="pq-card-icon">🧭</div>
+        <div class="pq-card-title">Investidor iniciante</div>
+        <div class="pq-card-desc">Quer entrar no modelo Airbnb mas precisa entender se faz sentido financeiro antes de comprometer o capital.</div>
+        <ul class="pq-card-ul">
+          <li>Nunca fez os cálculos completos</li>
+          <li>Não sabe quanto vai pagar de imposto</li>
+          <li>Quer comparar imóveis antes de decidir</li>
+        </ul>
+      </div>
+      <div class="pq-card reveal" style="transition-delay:0.1s;">
+        <div class="pq-card-icon">🤝</div>
+        <div class="pq-card-title">Corretor imobiliário</div>
+        <div class="pq-card-desc">Atende clientes interessados em Airbnb e precisa de uma ferramenta profissional para apresentar a viabilidade do imóvel.</div>
+        <ul class="pq-card-ul">
+          <li>Aumenta credibilidade na negociação</li>
+          <li>Responde objeções com dados</li>
+          <li>Diferencia o atendimento</li>
+        </ul>
+      </div>
+      <div class="pq-card reveal" style="transition-delay:0.2s;">
+        <div class="pq-card-icon">🏠</div>
+        <div class="pq-card-title">Gestor de propriedades</div>
+        <div class="pq-card-desc">Administra ou vai administrar unidades no modelo short stay e precisa apresentar projeções concretas para os proprietários.</div>
+        <ul class="pq-card-ul">
+          <li>Justifica taxas de gestão com retorno</li>
+          <li>Analisa viabilidade de novos contratos</li>
+          <li>Apresenta cenários a investidores</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PREVIEW ══════════ -->
+<section class="preview" id="preview">
+  <div class="wrap">
+    <div class="preview-inner">
+      <div class="preview-mockup reveal">
+        <div class="mock-bar">
+          <div class="mock-dot"></div>
+          <div class="mock-dot"></div>
+          <div class="mock-dot"></div>
+        </div>
+        <div class="mock-tabs">
+          <div class="mock-tab active">① Aquisição</div>
+          <div class="mock-tab">② Receita</div>
+          <div class="mock-tab">③ Resultado</div>
+          <div class="mock-tab">④ Venda</div>
+        </div>
+        <div class="mock-big">
+          <div class="mock-big-label">Investimento Total Inicial</div>
+          <div class="mock-big-val">R$ 687.400</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">Preço real de compra</div>
+          <div class="mock-val">R$ 500.000</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">ITBI + cartório + comissão</div>
+          <div class="mock-val">R$ 22.500</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">Reforma + contingência</div>
+          <div class="mock-val">R$ 115.000</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">Mobília + enxoval + decoração</div>
+          <div class="mock-val">R$ 32.000</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">Lucro líquido mensal (base)</div>
+          <div class="mock-val verde">R$ 4.820</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">Payback estimado (base)</div>
+          <div class="mock-val">11,8 anos</div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-label">Retorno vs CDI</div>
+          <div class="mock-val sage">calculando…</div>
+        </div>
+      </div>
+
+      <div class="preview-content reveal" style="transition-delay:0.2s;">
+        <div class="section-eyebrow">Como funciona</div>
+        <h2 class="section-title">Preencha os dados.<br><em>O resultado aparece</em><br>em tempo real.</h2>
+        <p class="section-body" style="margin-bottom:0;">Não é uma planilha travada com fórmulas escondidas. É um arquivo interativo — você ajusta qualquer campo e todos os resultados atualizam automaticamente.</p>
+        <ul class="checklist" style="margin-top:24px;">
+          <li><div class="check-icon">✓</div>Cada campo tem explicação com valores de referência de mercado</li>
+          <li><div class="check-icon">✓</div>Sliders e campos numéricos para facilitar o preenchimento</li>
+          <li><div class="check-icon">✓</div>Aba "Como Usar" com dicionário completo dos termos</li>
+          <li><div class="check-icon">✓</div>Funciona offline — sem internet, sem login, sem assinatura</li>
+          <li><div class="check-icon">✓</div>Exportar como PDF direto do browser com um clique</li>
+          <li><div class="check-icon">✓</div>Use quantas vezes quiser, em quantos imóveis quiser</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA MEIO ══════════ -->
+<section class="cta-meio">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Chega de calcular<br><em>de cabeça.</em></h2>
+      <p>Uma decisão de R$ 500 mil merece uma análise completa. A ferramenta custa R$ 197 — uma vez só.</p>
+      <a href="#preco" class="btn-cta" style="display:inline-flex;">Ver condições →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ O QUE INCLUI ══════════ -->
+<section class="inclui">
+  <div class="wrap">
+    <div class="inclui-inner">
+      <div class="reveal">
+        <div class="section-eyebrow">O que você recebe</div>
+        <h2 class="section-title">Tudo o que<br><em>você precisa</em></h2>
+        <p class="section-body">Ao comprar, você recebe o arquivo diretamente no seu e-mail. Sem assinatura, sem renovação, sem depender de servidor. O arquivo é seu.</p>
+        <div style="margin-top:32px;padding:24px;background:var(--creme);border-radius:3px;border:1px solid rgba(92,51,23,0.1);">
+          <div style="font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--sage);margin-bottom:12px;">Entrega imediata via e-mail</div>
+          <div style="font-size:13px;color:var(--texto);line-height:1.7;">Após a confirmação do pagamento, o arquivo é enviado automaticamente para o e-mail cadastrado. Funciona em qualquer navegador — Chrome, Safari, Firefox, Edge.</div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.15s;">
+        <ul class="inclui-list">
+          <li>
+            <div class="inclui-icon">📐</div>
+            <div>
+              <div class="inclui-text-title">Calculadora completa (arquivo .html)</div>
+              <div class="inclui-text-desc">4 abas interativas com todos os módulos: aquisição, receita, resultado e cenário de venda.</div>
+            </div>
+          </li>
+          <li>
+            <div class="inclui-icon">📖</div>
+            <div>
+              <div class="inclui-text-title">Aba "Como Usar" integrada</div>
+              <div class="inclui-text-desc">Manual completo dentro do próprio arquivo. Dicionário com todos os termos financeiros e dicas de uso.</div>
+            </div>
+          </li>
+          <li>
+            <div class="inclui-icon">🏛️</div>
+            <div>
+              <div class="inclui-text-title">Módulo de leilão judicial</div>
+              <div class="inclui-text-desc">Calcule o lance máximo viável considerando todos os custos do processo e o retorno mínimo exigido.</div>
+            </div>
+          </li>
+          <li>
+            <div class="inclui-icon">🏦</div>
+            <div>
+              <div class="inclui-text-title">Módulo de financiamento bancário</div>
+              <div class="inclui-text-desc">Simule entrada, parcela e impacto no retorno para operações com crédito imobiliário.</div>
+            </div>
+          </li>
+          <li>
+            <div class="inclui-icon">⚡</div>
+            <div>
+              <div class="inclui-text-title">Acesso vitalício, sem internet</div>
+              <div class="inclui-text-desc">Funciona offline, em qualquer computador. Sem login, sem assinatura, sem prazo de expiração.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PREÇO ══════════ -->
+<section class="preco-section" id="preco">
+  <div class="wrap">
+    <div class="preco-inner">
+      <div class="reveal">
+        <div class="section-eyebrow">Investimento</div>
+        <h2 class="section-title">Uma vez só.<br><em>Use para sempre.</em></h2>
+        <p class="section-body" style="max-width:420px;margin:0 auto;">Não é assinatura. Não é curso. É uma ferramenta que você compra uma vez e usa em toda análise de imóvel que quiser fazer.</p>
+      </div>
+
+      <div class="preco-card reveal" style="transition-delay:0.2s;">
+        <div class="preco-label">Calculadora Short Stay</div>
+        <div class="preco-titulo">Acesso completo · Uso vitalício</div>
+
+        <div class="preco-linha">4 módulos completos de análise</div>
+        <div class="preco-linha">Módulo de leilão judicial</div>
+        <div class="preco-linha">Módulo de financiamento bancário</div>
+        <div class="preco-linha">3 cenários simultâneos (cons. / base / otimista)</div>
+        <div class="preco-linha">Comparação automática com CDI</div>
+        <div class="preco-linha">Aba "Como Usar" com dicionário</div>
+        <div class="preco-linha">Exportar como PDF com 1 clique</div>
+        <div class="preco-linha">Funciona offline, sem login</div>
+
+        <div class="preco-divider"></div>
+
+        <div class="preco-valor-wrap">
+          <div class="preco-de">Pagamento único</div>
+          <div class="preco-principal"><sup>R$</sup>197</div>
+          <div class="preco-obs">Entrega imediata por e-mail · Arquivo .html</div>
+        </div>
+
+        <a href="#" class="preco-cta">Comprar agora →</a>
+
+        <div class="preco-garantia">
+          Pagamento processado com segurança via Kiwify.<br>
+          Pix · Cartão de crédito · Boleto
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="faq-inner">
+      <div class="faq-header reveal">
+        <div class="section-eyebrow">Dúvidas frequentes</div>
+        <h2 class="section-title">Perguntas<br><em>comuns</em></h2>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Precisa ter conhecimento financeiro para usar?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Não. A calculadora foi feita pensando em quem está começando. Cada campo tem uma explicação com valores de referência ao passar o cursor no "?". A aba "Como Usar" tem um dicionário completo com todos os termos — CDI, ITBI, payback, ganho de capital — explicados de forma direta.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Funciona para imóveis fora do Rio de Janeiro?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Sim. A calculadora é totalmente adaptável a qualquer cidade. Os valores de referência nos tooltips foram desenvolvidos com base no mercado carioca, mas todos os campos são editáveis — você coloca os números do seu mercado e o cálculo funciona da mesma forma.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Como recebo o arquivo após a compra?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Imediatamente após a confirmação do pagamento, o arquivo é enviado automaticamente para o e-mail cadastrado na compra. Você baixa, salva no seu computador e usa offline, sem precisar de internet ou login.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Posso usar em mais de um imóvel?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Sim, sem limite. O arquivo é seu — use quantas vezes quiser, para quantos imóveis quiser analisar. A licença é pessoal e intransferível, mas não há restrição de uso para você mesmo.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Precisa instalar algum programa?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Não. É um arquivo .html — abre direto no navegador (Chrome, Safari, Firefox, Edge). Não precisa de Excel, Word, Adobe nem nenhum software especial. Funciona em Windows e Mac.</div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          O arquivo salva meus dados?
+          <span class="faq-arrow">+</span>
+        </div>
+        <div class="faq-a">Os dados ficam apenas na sua sessão — ao fechar o navegador, os valores são resetados. Para guardar uma análise, use o botão "Exportar / Imprimir" para salvar como PDF antes de fechar. Seus dados nunca são enviados para nenhum servidor.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FINAL CTA ══════════ -->
+<section class="final-cta">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Toda análise começa<br>com <em>o número certo.</em></h2>
+      <p>Pare de decidir no feeling. A calculadora que mostra se a operação fecha — antes de você assinar qualquer contrato.</p>
+      <a href="#preco" class="btn-cta">Quero a calculadora · R$ 197 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <p>
+    Calculadora Short Stay · © 2025 Todos os direitos reservados<br>
+    Licença de uso pessoal e intransferível · Proibida a redistribuição ou revenda<br>
+    <span style="opacity:0.5;">As projeções desta ferramenta são estimativas. Consulte sempre um contador e advogado imobiliário para decisões definitivas.</span>
+  </p>
+</footer>
+
+<script>
+// FAQ toggle
+function toggleFaq(btn) {
+  var item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+// Reveal on scroll
+function checkReveal() {
+  var reveals = document.querySelectorAll('.reveal');
+  var windowHeight = window.innerHeight;
+  reveals.forEach(function(el) {
+    var top = el.getBoundingClientRect().top;
+    if (top < windowHeight - 80) {
+      el.classList.add('visible');
+    }
+  });
+}
+
+window.addEventListener('scroll', checkReveal);
+window.addEventListener('load', checkReveal);
+
+// Smooth price highlight on CTA hover
+document.querySelectorAll('a[href="#preco"]').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('preco').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+document.querySelectorAll('a[href="#preview"]').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('preview').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
