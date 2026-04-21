@@ -267,6 +267,14 @@ footer a:hover { color:var(--nude); }
 </head>
 <body>
 
+<!-- FAIXA URGÊNCIA -->
+<div style="background:#8B3A3A;padding:14px 24px;text-align:center;position:sticky;top:0;z-index:999;">
+  <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#FAF8F4;line-height:1.5;">
+    🔥 <strong>Oferta de lançamento:</strong> De R$ 197 por <strong>R$ 97</strong> — por tempo limitado &nbsp;·&nbsp;
+    <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" style="color:#C4B09A;font-weight:600;text-decoration:underline;">Garantir agora →</a>
+  </p>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
@@ -298,8 +306,9 @@ footer a:hover { color:var(--nude); }
         <div><div class="hci-label">Retorno total na saída</div><div class="hci-desc">Renda acumulada + venda − todos os custos → resultado real</div></div>
       </div>
       <div class="hero-price-tag">
-        <div class="hero-price-from">Acesso único por</div>
-        <div class="hero-price-val">R$ 197</div>
+        <div class="hero-price-from">Oferta de lançamento</div>
+        <div style="font-size:13px;color:rgba(244,239,230,.35);text-decoration:line-through;margin-bottom:2px;">R$ 197</div>
+        <div class="hero-price-val">R$ 97</div>
         <div class="hero-price-sub">arquivo para download · uso vitalício</div>
       </div>
     </div>
@@ -310,6 +319,205 @@ footer a:hover { color:var(--nude); }
 <div class="cdi-banner">
   <p>💡 <strong>O que é o CDI?</strong> É a taxa de rendimento da renda fixa no Brasil — o que seu dinheiro rende "parado no banco". Se o Airbnb não superar essa taxa, o risco e o trabalho não se justificam.</p>
 </div>
+
+<!-- PREVIEW -->
+<section class="preview" id="preview">
+  <div class="wrap">
+    <div class="preview-header reveal">
+      <div class="section-eyebrow">Por dentro da ferramenta</div>
+      <h2 class="section-title">Veja funcionando<br><em>em tempo real</em></h2>
+      <p class="section-body">Digite o preço do imóvel e veja os resultados calculando na hora. É exatamente assim que funciona quando você baixar.</p>
+    </div>
+
+    <!-- DEMO INTERATIVA -->
+    <div class="reveal" style="max-width:780px;margin:0 auto 48px;">
+      <div style="background:var(--verde-escuro);border-radius:10px;overflow:hidden;box-shadow:0 40px 100px rgba(45,59,42,.35);">
+        <!-- barra do browser -->
+        <div style="background:rgba(0,0,0,.25);padding:14px 20px;display:flex;align-items:center;gap:8px;">
+          <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.15);"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.1);"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.07);"></div>
+          <div style="flex:1;background:rgba(255,255,255,.06);border-radius:20px;padding:5px 14px;margin-left:8px;font-size:10px;color:rgba(244,239,230,.3);letter-spacing:.5px;">calculadora-shortstay.html</div>
+        </div>
+        <!-- abas -->
+        <div style="display:flex;background:rgba(0,0,0,.15);border-bottom:1px solid rgba(255,255,255,.06);">
+          <div id="demo-tab-1" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--nude);padding:10px 18px;border-bottom:2px solid var(--nude);cursor:pointer;" onclick="demoTab(1)">① Aquisição</div>
+          <div id="demo-tab-2" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.3);padding:10px 18px;border-bottom:2px solid transparent;cursor:pointer;" onclick="demoTab(2)">② Receita</div>
+          <div id="demo-tab-3" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.3);padding:10px 18px;border-bottom:2px solid transparent;cursor:pointer;" onclick="demoTab(3)">③ Resultado</div>
+          <div id="demo-tab-4" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.3);padding:10px 18px;border-bottom:2px solid transparent;cursor:pointer;" onclick="demoTab(4)">④ Venda</div>
+        </div>
+        <!-- conteúdo -->
+        <div style="padding:28px 28px 32px;">
+
+          <!-- ABA 1 -->
+          <div id="demo-panel-1">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(196,176,154,.5);margin-bottom:20px;">Dados do imóvel</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+              <div>
+                <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.4);margin-bottom:8px;">Preço do imóvel</div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(196,176,154,.2);border-radius:4px;padding:11px 14px;display:flex;align-items:center;gap:8px;">
+                  <span style="font-size:12px;color:rgba(196,176,154,.5);">R$</span>
+                  <span id="demo-preco" style="font-size:16px;color:var(--creme);font-family:'Cormorant Garamond',serif;">0</span>
+                  <span id="demo-cursor" style="display:inline-block;width:2px;height:16px;background:var(--nude);animation:blink 1s infinite;">|</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.4);margin-bottom:8px;">Área (m²)</div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(196,176,154,.15);border-radius:4px;padding:11px 14px;">
+                  <span style="font-size:16px;color:var(--creme);font-family:'Cormorant Garamond',serif;">35 m²</span>
+                </div>
+              </div>
+            </div>
+            <div style="height:1px;background:rgba(255,255,255,.06);margin-bottom:20px;"></div>
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(196,176,154,.5);margin-bottom:14px;">Calculado automaticamente</div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">ITBI (3%)</div>
+              <div id="demo-itbi" style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#C47A7A;">R$ —</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Cartório + registro</div>
+              <div id="demo-cartorio" style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#C47A7A;">R$ —</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Reforma + contingência</div>
+              <div id="demo-reforma" style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#C47A7A;">R$ —</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:12px 0 0;">
+              <div style="font-size:12px;font-weight:600;color:var(--creme);">INVESTIMENTO TOTAL</div>
+              <div id="demo-total" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--nude);">R$ —</div>
+            </div>
+          </div>
+
+          <!-- ABA 2 -->
+          <div id="demo-panel-2" style="display:none;">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(196,176,154,.5);margin-bottom:20px;">Projeção de receita</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+              <div>
+                <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.4);margin-bottom:8px;">Diária média</div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(196,176,154,.15);border-radius:4px;padding:11px 14px;">
+                  <span style="font-size:16px;color:var(--creme);font-family:'Cormorant Garamond',serif;">R$ 350</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.4);margin-bottom:8px;">Ocupação base</div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(196,176,154,.15);border-radius:4px;padding:11px 14px;">
+                  <span style="font-size:16px;color:var(--creme);font-family:'Cormorant Garamond',serif;">72%</span>
+                </div>
+              </div>
+            </div>
+            <div style="height:1px;background:rgba(255,255,255,.06);margin-bottom:20px;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+              <div style="background:rgba(122,125,110,.15);border:1px solid rgba(122,125,110,.3);border-radius:4px;padding:14px;text-align:center;">
+                <div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--sage);margin-bottom:6px;">Conservador</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--sage);">R$ 3.1k</div>
+                <div style="font-size:9px;color:rgba(244,239,230,.3);margin-top:3px;">60% ocup.</div>
+              </div>
+              <div style="background:rgba(139,117,38,.15);border:1px solid rgba(139,117,38,.3);border-radius:4px;padding:14px;text-align:center;">
+                <div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dourado);margin-bottom:6px;">Base</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--dourado);">R$ 4.8k</div>
+                <div style="font-size:9px;color:rgba(244,239,230,.3);margin-top:3px;">72% ocup.</div>
+              </div>
+              <div style="background:rgba(58,107,74,.15);border:1px solid rgba(58,107,74,.3);border-radius:4px;padding:14px;text-align:center;">
+                <div style="font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:#7BC47A;margin-bottom:6px;">Otimista</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#7BC47A;">R$ 6.9k</div>
+                <div style="font-size:9px;color:rgba(244,239,230,.3);margin-top:3px;">85% ocup.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA 3 -->
+          <div id="demo-panel-3" style="display:none;">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(196,176,154,.5);margin-bottom:20px;">Resultado & Payback</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
+              <div style="text-align:center;background:rgba(255,255,255,.04);border-radius:4px;padding:16px 8px;">
+                <div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.35);margin-bottom:6px;">Receita bruta</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--creme);">R$ 7.6k</div>
+                <div style="font-size:9px;color:rgba(244,239,230,.3);margin-top:2px;">por mês</div>
+              </div>
+              <div style="text-align:center;background:rgba(255,255,255,.04);border-radius:4px;padding:16px 8px;">
+                <div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(244,239,230,.35);margin-bottom:6px;">Custos totais</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#C47A7A;">R$ 2.8k</div>
+                <div style="font-size:9px;color:rgba(244,239,230,.3);margin-top:2px;">por mês</div>
+              </div>
+              <div style="text-align:center;background:rgba(58,107,74,.12);border:1px solid rgba(58,107,74,.2);border-radius:4px;padding:16px 8px;">
+                <div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#7BC47A;margin-bottom:6px;">Lucro líquido</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--creme);" id="demo-lucro">R$ 4.8k</div>
+                <div style="font-size:9px;color:rgba(244,239,230,.3);margin-top:2px;">por mês</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Payback estimado</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--nude);" id="demo-payback">—</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Retorno anual</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--nude);" id="demo-retorno">—</div>
+            </div>
+            <div id="demo-verdict" style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:4px;margin-top:14px;background:rgba(139,117,38,.1);border:1px solid rgba(139,117,38,.25);">
+              <div style="font-size:18px;">⚖️</div>
+              <div>
+                <div style="font-size:12px;font-weight:600;color:var(--dourado);margin-bottom:3px;" id="demo-verdict-title">Calculando...</div>
+                <div style="font-size:11px;color:rgba(244,239,230,.45);line-height:1.6;" id="demo-verdict-desc">Preencha os campos anteriores</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABA 4 -->
+          <div id="demo-panel-4" style="display:none;">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(196,176,154,.5);margin-bottom:20px;">Resultado consolidado — renda + venda</div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Investimento inicial total</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#C47A7A;" id="demo-inv-total">—</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Renda líquida acumulada (7 anos)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#7BC47A;" id="demo-renda-acum">—</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);">
+              <div style="font-size:11px;color:rgba(244,239,230,.4);">Líquido da venda (projeção)</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#7BC47A;" id="demo-venda-liq">—</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 0;">
+              <div style="font-size:13px;font-weight:600;color:var(--creme);">RETORNO TOTAL LÍQUIDO</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#7BC47A;" id="demo-retorno-total">—</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:24px;padding:24px 32px;background:var(--creme);border-radius:4px;border:1px solid rgba(92,51,23,.1);">
+        <div style="font-size:16px;font-weight:600;color:var(--verde-escuro);margin-bottom:10px;">👆 Clique nas abas acima para explorar a demo</div>
+        <p style="font-size:15px;color:var(--sage);line-height:1.75;">Esta é apenas uma <strong style="color:var(--texto);">amostra simplificada</strong> do que a calculadora faz. A versão completa tem muito mais — sliders de ocupação, módulo de financiamento bancário, módulo de leilão judicial, comparação automática com a renda fixa, exportação em PDF e muito mais. <strong style="color:var(--verde-escuro);">Tudo atualiza em tempo real enquanto você preenche.</strong></p>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REFRAME DE VALOR -->
+<section style="background:var(--verde-escuro);padding:80px 0;">
+  <div class="wrap">
+    <div class="reveal" style="max-width:780px;margin:0 auto;text-align:center;">
+      <div class="section-eyebrow" style="color:var(--nude);opacity:.7;text-align:center;">Uma pergunta rápida</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,54px);font-weight:300;color:var(--creme);line-height:1.2;margin-bottom:28px;">
+        Quanto custa <em style="font-style:italic;color:var(--nude);">errar a conta</em><br>num imóvel de R$ 500 mil?
+      </h2>
+      <p style="font-size:17px;color:rgba(244,239,230,.6);line-height:1.85;margin-bottom:40px;max-width:620px;margin-left:auto;margin-right:auto;">
+        Comprar caro demais. Pagar mais imposto do que deveria. Descobrir que o retorno não bate a renda fixa depois de imobilizar o capital. <strong style="color:rgba(244,239,230,.85);">Esses erros custam dezenas de milhares de reais.</strong>
+      </p>
+      <div style="background:rgba(196,176,154,.08);border:1px solid rgba(196,176,154,.15);border-radius:4px;padding:40px;margin-bottom:40px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,42px);font-weight:300;color:var(--creme);line-height:1.3;margin-bottom:16px;">
+          R$ 97 é <em style="font-style:italic;color:var(--nude);">0,01%</em> de um imóvel de R$ 800 mil.
+        </div>
+        <p style="font-size:16px;color:rgba(244,239,230,.55);line-height:1.75;">
+          É o custo de uma análise completa antes de assinar qualquer contrato. Se evitar um erro de precificação, pagar imposto a mais, ou entrar num investimento que não fecha — ela se paga centenas de vezes.
+        </p>
+      </div>
+      <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" class="btn-cta" style="display:inline-flex;">Quero analisar antes de comprar — R$ 97 →</a>
+    </div>
+  </div>
+</section>
 
 <!-- PROBLEMA -->
 <section class="problema">
@@ -412,86 +620,6 @@ footer a:hover { color:var(--nude); }
   </div>
 </section>
 
-<!-- PREVIEW -->
-<section class="preview" id="preview">
-  <div class="wrap">
-    <div class="preview-header reveal">
-      <div class="section-eyebrow">Por dentro da ferramenta</div>
-      <h2 class="section-title">Veja como ela<br><em>funciona na prática</em></h2>
-      <p class="section-body">Preencha os dados do imóvel e todos os resultados atualizam em tempo real. Sem fórmulas escondidas, sem planilha travada.</p>
-    </div>
-    <div class="preview-grid">
-      <div class="reveal" style="transition-delay:0s;">
-        <div class="calc-mockup">
-          <div class="calc-header"><div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot"></div></div>
-          <div class="calc-tabs"><div class="calc-tab active">① Aquisição</div><div class="calc-tab">② Receita</div><div class="calc-tab">③ Resultado</div><div class="calc-tab">④ Venda</div></div>
-          <div class="calc-body">
-            <div class="calc-section-tag">Investimento total inicial</div>
-            <div class="calc-big-number"><div class="calc-big-label">Exemplo — imóvel analisado</div><div class="calc-big-val" style="font-size:24px;">Apartamento · 35m² · Zona Sul</div></div>
-            <div class="calc-row"><div class="calc-row-label">Preço real de compra</div><div class="calc-row-val">R$ 500.000</div></div>
-            <div class="calc-row"><div class="calc-row-label">ITBI + cartório + comissão</div><div class="calc-row-val vermelho">R$ 22.500</div></div>
-            <div class="calc-row"><div class="calc-row-label">Reforma + contingência</div><div class="calc-row-val vermelho">R$ 115.000</div></div>
-            <div class="calc-row"><div class="calc-row-label">Mobília + enxoval + decoração</div><div class="calc-row-val vermelho">R$ 32.000</div></div>
-            <div class="calc-row"><div class="calc-row-label">Custo/m² total</div><div class="calc-row-val">R$ 19.640/m²</div></div>
-          </div>
-        </div>
-        <div class="preview-caption">Aba ① — todos os custos de entrada calculados automaticamente</div>
-      </div>
-      <div class="reveal" style="transition-delay:.15s;">
-        <div class="calc-mockup">
-          <div class="calc-header"><div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot"></div></div>
-          <div class="calc-tabs"><div class="calc-tab">① Aquisição</div><div class="calc-tab">② Receita</div><div class="calc-tab active">③ Resultado</div><div class="calc-tab">④ Venda</div></div>
-          <div class="calc-body">
-            <div class="calc-section-tag">3 cenários simultâneos</div>
-            <div class="cenarios-strip">
-              <div class="cen cons"><div class="cen-label">Conservador</div><div class="cen-val">R$ 3.1k</div><div class="cen-sub">60% ocup.</div></div>
-              <div class="cen base"><div class="cen-label">Base</div><div class="cen-val">R$ 4.8k</div><div class="cen-sub">72% ocup.</div></div>
-              <div class="cen otim"><div class="cen-label">Otimista</div><div class="cen-val">R$ 6.9k</div><div class="cen-sub">85% ocup.</div></div>
-            </div>
-            <div class="calc-row" style="margin-top:14px;"><div class="calc-row-label">Payback (cenário base)</div><div class="calc-row-val">11,8 anos</div></div>
-            <div class="calc-row"><div class="calc-row-label">Retorno anual (base)</div><div class="calc-row-val verde">8,4% a.a.</div></div>
-            <div class="verdict-box"><div class="verdict-icon">📊</div><div class="verdict-text"><strong>Atenção — análise necessária</strong><span>Retorno abaixo do recomendado. Revise o preço de compra ou a diária projetada.</span></div></div>
-          </div>
-        </div>
-        <div class="preview-caption">Aba ③ — 3 cenários + veredicto automático vs. renda fixa</div>
-      </div>
-      <div class="reveal" style="transition-delay:.3s;">
-        <div class="calc-mockup">
-          <div class="calc-header"><div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot"></div></div>
-          <div class="calc-tabs"><div class="calc-tab">① Aquisição</div><div class="calc-tab">② Receita</div><div class="calc-tab">③ Resultado</div><div class="calc-tab active">④ Venda</div></div>
-          <div class="calc-body">
-            <div class="calc-section-tag">Resultado consolidado — renda + venda</div>
-            <div class="calc-row"><div class="calc-row-label">Investimento inicial total</div><div class="calc-row-val vermelho">R$ 687.400</div></div>
-            <div class="calc-row"><div class="calc-row-label">Renda líquida acumulada (7 anos)</div><div class="calc-row-val verde">R$ 403.200</div></div>
-            <div class="calc-row"><div class="calc-row-label">Líquido da venda do imóvel</div><div class="calc-row-val verde">R$ 748.000</div></div>
-            <div class="calc-row"><div class="calc-row-label">Retorno total líquido</div><div class="calc-row-val verde" style="font-size:18px;">R$ 463.800</div></div>
-            <div class="calc-row"><div class="calc-row-label">Retorno anualizado</div><div class="calc-row-val">14,2% a.a.</div></div>
-          </div>
-        </div>
-        <div class="preview-caption">Aba ④ — resultado total da operação: renda + venda</div>
-      </div>
-      <div class="reveal" style="transition-delay:.45s;">
-        <div class="calc-mockup">
-          <div class="calc-header"><div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot"></div></div>
-          <div class="calc-tabs"><div class="calc-tab active">① Leilão Judicial</div><div class="calc-tab">② Receita</div><div class="calc-tab">③ Resultado</div><div class="calc-tab">④ Venda</div></div>
-          <div class="calc-body">
-            <div class="calc-section-tag">Lance máximo por cenário</div>
-            <div class="cenarios-strip">
-              <div class="cen cons"><div class="cen-label">Conservador</div><div class="cen-val">R$ 312k</div><div class="cen-sub">Lance máx.</div></div>
-              <div class="cen base"><div class="cen-label">Base</div><div class="cen-val">R$ 398k</div><div class="cen-sub">Lance máx.</div></div>
-              <div class="cen otim"><div class="cen-label">Otimista</div><div class="cen-val">R$ 487k</div><div class="cen-sub">Lance máx.</div></div>
-            </div>
-            <div class="calc-row" style="margin-top:14px;"><div class="calc-row-label">Lance mínimo do edital</div><div class="calc-row-val">R$ 280.000</div></div>
-            <div class="calc-row"><div class="calc-row-label">Total custos do processo</div><div class="calc-row-val vermelho">R$ 42.500</div></div>
-            <div class="calc-row"><div class="calc-row-label">Custo de oportunidade</div><div class="calc-row-val vermelho">R$ 18.200</div></div>
-          </div>
-        </div>
-        <div class="preview-caption">Módulo leilão — calcula o lance máximo que ainda gera retorno</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FEATURES -->
 <section class="features">
   <div class="wrap">
@@ -530,7 +658,13 @@ footer a:hover { color:var(--nude); }
   <div class="wrap">
     <div class="reveal">
       <h2>Chega de calcular<br><em>de cabeça.</em></h2>
-      <p>Qualquer imóvel — seja R$ 200 mil ou R$ 1 milhão — merece uma análise completa antes da assinatura. A ferramenta custa R$ 197 — uma vez só.</p>
+      <p>Qualquer imóvel — seja R$ 200 mil ou R$ 1 milhão — merece uma análise completa antes da assinatura.</p>
+      <div style="margin:20px auto 32px;display:inline-flex;align-items:center;gap:16px;background:rgba(255,255,255,.06);border:1px solid rgba(196,176,154,.2);border-radius:4px;padding:16px 32px;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(244,239,230,.35);text-decoration:line-through;">R$ 197</span>
+        <span style="font-size:13px;color:rgba(244,239,230,.4);">→</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--creme);">R$ 97</span>
+        <span style="font-size:12px;color:rgba(244,239,230,.4);line-height:1.4;">oferta de<br>lançamento</span>
+      </div>
       <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" class="btn-cta" style="display:inline-flex;">Ver condições →</a>
     </div>
   </div>
@@ -584,9 +718,11 @@ footer a:hover { color:var(--nude); }
         <div class="preco-linha">Funciona offline, sem login</div>
         <div class="preco-divider"></div>
         <div class="preco-valor-wrap">
-          <div class="preco-de">Pagamento único</div>
-          <div class="preco-principal"><sup>R$</sup>197</div>
+          <div class="preco-de">Oferta de lançamento</div>
+          <div style="font-size:18px;color:rgba(244,239,230,.35);text-decoration:line-through;margin-bottom:4px;">R$ 197</div>
+          <div class="preco-principal"><sup>R$</sup>97</div>
           <div class="preco-obs">Entrega imediata por e-mail · Arquivo .zip</div>
+          <div style="margin-top:12px;background:rgba(139,58,58,.2);border:1px solid rgba(139,58,58,.3);border-radius:3px;padding:10px 14px;font-size:13px;color:#E8A0A0;">⏳ Preço promocional por tempo limitado — volta para R$ 197 em breve</div>
         </div>
         <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" class="preco-cta">Comprar agora →</a>
         <div class="preco-garantia">Pagamento processado com segurança via Kiwify.<br>Pix · Cartão de crédito · Boleto</div>
@@ -619,7 +755,7 @@ footer a:hover { color:var(--nude); }
     <div class="reveal">
       <h2>Toda análise começa<br>com <em>o número certo.</em></h2>
       <p>Pare de decidir no feeling. A calculadora que mostra se a operação fecha — antes de você assinar qualquer contrato.</p>
-      <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" class="btn-cta">Quero a calculadora · R$ 197 →</a>
+      <a href="https://pay.kiwify.com.br/8h9Go1o" target="_blank" class="btn-cta">Quero a calculadora · R$ 97 →</a>
     </div>
   </div>
 </section>
@@ -633,6 +769,113 @@ footer a:hover { color:var(--nude); }
   </p>
 </footer>
 
+<script>
+// ── DEMO INTERATIVA ──────────────────────────────────────────────────
+var demoPreco = 0;
+var demoAlvo = 650000;
+var demoDigitando = false;
+var demoSeq = ['6','65','650','6500','65000','650000'];
+var demoStep = 0;
+
+function fmtDemo(v) {
+  return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+}
+
+function calcDemo(preco) {
+  var itbi = preco * 0.03;
+  var cartorio = preco * 0.0125;
+  var reforma = 35 * 2000 * 1.15;
+  var total = preco + itbi + cartorio + reforma + 35000;
+  document.getElementById('demo-itbi').textContent = fmtDemo(itbi);
+  document.getElementById('demo-cartorio').textContent = fmtDemo(cartorio);
+  document.getElementById('demo-reforma').textContent = fmtDemo(reforma);
+  document.getElementById('demo-total').textContent = fmtDemo(total);
+  // aba 4
+  var el1 = document.getElementById('demo-inv-total');
+  var el2 = document.getElementById('demo-renda-acum');
+  var el3 = document.getElementById('demo-venda-liq');
+  var el4 = document.getElementById('demo-retorno-total');
+  if (el1) { el1.textContent = fmtDemo(total); }
+  if (el2) { var ra = 4800*12*7; el2.textContent = fmtDemo(ra); }
+  if (el3) { var vl = preco * Math.pow(1.05, 7) * 0.89; el3.textContent = fmtDemo(vl); }
+  if (el4) { var rt = (4800*12*7) + (preco * Math.pow(1.05,7)*0.89) - total; el4.textContent = fmtDemo(rt); }
+  // payback e retorno
+  var pb = document.getElementById('demo-payback');
+  var ret = document.getElementById('demo-retorno');
+  var vt = document.getElementById('demo-verdict-title');
+  var vd = document.getElementById('demo-verdict-desc');
+  var ve = document.getElementById('demo-verdict');
+  if (pb && preco > 0) {
+    var payback = total / 4800 / 12;
+    pb.textContent = payback.toFixed(1) + ' anos';
+    var retAnual = (4800 * 12 / total * 100).toFixed(1);
+    ret.textContent = retAnual + '% a.a.';
+    if (parseFloat(retAnual) >= 12) {
+      ve.style.background = 'rgba(58,107,74,.12)';
+      ve.style.border = '1px solid rgba(58,107,74,.25)';
+      vt.style.color = '#7BC47A';
+      vt.textContent = '✅ Operação viável — supera a renda fixa';
+      vd.textContent = 'Retorno de ' + retAnual + '% a.a. está acima do benchmark recomendado.';
+    } else {
+      ve.style.background = 'rgba(139,117,38,.1)';
+      ve.style.border = '1px solid rgba(139,117,38,.25)';
+      vt.style.color = 'var(--dourado)';
+      vt.textContent = '⚖️ Atenção — revise os números';
+      vd.textContent = 'Retorno de ' + retAnual + '% a.a. está abaixo do recomendado. Tente negociar o preço ou ajustar a diária.';
+    }
+  }
+}
+
+function animarDigitacao() {
+  if (demoStep >= demoSeq.length) {
+    demoStep = demoSeq.length - 1;
+    document.getElementById('demo-cursor').style.display = 'none';
+    return;
+  }
+  var val = demoSeq[demoStep];
+  document.getElementById('demo-preco').textContent = parseInt(val).toLocaleString('pt-BR');
+  calcDemo(parseInt(val));
+  demoStep++;
+  setTimeout(animarDigitacao, demoStep < 3 ? 180 : demoStep < 5 ? 220 : 300);
+}
+
+function demoTab(n) {
+  for (var i = 1; i <= 4; i++) {
+    var tab = document.getElementById('demo-tab-' + i);
+    var panel = document.getElementById('demo-panel-' + i);
+    if (tab && panel) {
+      if (i === n) {
+        tab.style.color = 'var(--nude)';
+        tab.style.borderBottom = '2px solid var(--nude)';
+        panel.style.display = 'block';
+      } else {
+        tab.style.color = 'rgba(244,239,230,.3)';
+        tab.style.borderBottom = '2px solid transparent';
+        panel.style.display = 'none';
+      }
+    }
+  }
+}
+
+// Iniciar animação quando entrar na viewport
+var demoStarted = false;
+function checkDemo() {
+  if (demoStarted) return;
+  var el = document.getElementById('demo-preco');
+  if (!el) return;
+  var rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight) {
+    demoStarted = true;
+    setTimeout(animarDigitacao, 800);
+  }
+}
+window.addEventListener('scroll', checkDemo);
+window.addEventListener('load', checkDemo);
+</script>
+
+<style>
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+</style>
 <script>
 function toggleFaq(btn) {
   btn.closest('.faq-item').classList.toggle('open');
